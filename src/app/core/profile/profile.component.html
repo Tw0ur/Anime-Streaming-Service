@@ -1,0 +1,17 @@
+<div *ngIf="user; else loading">
+  <ul>
+    <li>
+      <div>
+        {{ user.id }}
+      </div>
+      <div>
+        {{ user.name }}
+        {{ user.email }}
+      </div>
+    </li>
+  </ul>
+</div>
+<ng-template #loading>
+  <p>Loading users...</p>
+</ng-template>
+

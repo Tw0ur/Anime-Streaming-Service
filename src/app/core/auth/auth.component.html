@@ -1,0 +1,58 @@
+<div class="box">
+  <div class="auth-box">
+
+    <div class="login">
+      <h2 [class.active]="!logInBoolean" [class.nonactive]="logInBoolean" (click)="toggleSignIn(false)"> sign up </h2>
+      <h2 [class.active]="logInBoolean" [class.nonactive]="!logInBoolean" (click)="toggleSignIn(true)"> log in </h2>
+    </div>
+
+    <div *ngIf="!logInBoolean">
+      <form [formGroup]="signInForm" (ngSubmit)="signUp()">
+        <div>
+          <label for="name">Name:</label>
+          <input id="name" type="text" formControlName="name" placeholder="Enter your name">
+          <div *ngIf="signInForm.get('name')?.invalid && signInForm.get('name')?.touched">
+            Please enter a valid email.
+          </div>
+        </div>
+        <div>
+          <label for="email">Email:</label>
+          <input id="email" type="email" formControlName="email" placeholder="Enter your email">
+          <div *ngIf="signInForm.get('email')?.invalid && signInForm.get('email')?.touched">
+            Please enter a valid email.
+          </div>
+        </div>
+        <div>
+          <label for="password">Password:</label>
+          <input id="password" type="password" formControlName="password" placeholder="Enter your password">
+        </div>
+        <div>
+          <label for="matchingPass">Confirm Password:</label>
+          <input id="matchingPass" type="password" formControlName="matchingPass" placeholder="Confirm your password">
+          <div
+            *ngIf="signInForm.get('password')?.value !== signInForm.get('matchingPass')?.value && signInForm.get('matchingPass')?.touched">
+            Passwords must match.
+          </div>
+        </div>
+        <button type="submit" [disabled]="signInForm.invalid">Sign In</button>
+      </form>
+    </div>
+
+    <div *ngIf="logInBoolean">
+      <div [formGroup]="signInForm" (ngSubmit)="logIn()">
+        <form>
+          <div>
+            <input type="text" formControlName="email" placeholder="Email">
+
+          </div>
+          <div>
+            <input type="password" formControlName="password" placeholder="Password">
+          </div>
+          <button [disabled]="signInForm.invalid">
+            Log in
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

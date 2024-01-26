@@ -1,0 +1,31 @@
+<style>
+  nav {
+    display: flex;
+    height: 50px;
+    align-items: center;
+    margin-inline: 200px;
+    justify-content: space-between;
+    position: relative;
+  }
+</style>
+<nav>
+  <h1>
+    <a routerLink="/">
+      Din-commerce
+    </a>
+  </h1>
+  <div *ngIf="(auth | async) ; else loading">
+    <a [routerLink]="['/profile/' , id]">
+      Profile
+    </a>
+  </div>
+
+  <ng-template #loading>
+    <div>
+      <a routerLink="/auth">
+        Sign in
+      </a>
+    </div>
+  </ng-template>
+
+</nav>
